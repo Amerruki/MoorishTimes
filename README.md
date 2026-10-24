@@ -1,23 +1,9 @@
 # The Moorish Times
 
-Moroccan heritage revisited through a new lens. Custom code and integrations powering The Moorish Times.
+Front-end code the live site at moorishtimes.com loads. Nothing else belongs here: this repository is public.
 
-## What's in here
+- `scripts/` — site scripts, loaded commit-pinned from jsDelivr (`cdn.jsdelivr.net/gh/amerruki/MoorishTimes@<sha>/scripts/...`)
+- `styles/` — stylesheets, loaded the same way
+- `pwa/` — manifests, service worker, icons and screenshots for the installable web app, served same-origin through the PWA worker on pwa.moorish.cloud
 
-- Custom JavaScript and CSS
-- User interaction features (comments, search, newsletter)
-- Third-party integrations
-- Scripts for the Webflow site
-
-## Folder structure
-
-/scripts - JavaScript files
-/styles - CSS files
-/pwa - installable web app: manifests, service worker, icons
-/assets - Images, fonts, etc
-/integrations - API integrations
-
----
-
-The Moorish Times explores Moroccan history, culture, and society through articles by our contributors.
-Built on Webflow. Public repository.
+Files are referenced by commit hash, so a change goes live only when the pin on the site or worker is moved to the new commit.
