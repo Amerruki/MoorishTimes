@@ -177,6 +177,7 @@ pages = [
     "https://moorishtimes.com/articles",
     "https://moorishtimes.com/search",
     "https://moorishtimes.com/articles/zellige",
+    "https://moorishtimes.com/en/articles/bab-sebta",
     "https://moorishtimes.com/news/ram-previsions-2026-eep",
 ]
 sha = re.compile(r"https://cdn\.jsdelivr\.net/gh/amerruki/MoorishTimes@[0-9a-fA-F]{7,40}/[^\"'\s<>]+")

@@ -18,7 +18,7 @@ Webflow custom code, read from the public HTML. Each current file is byte-for-by
 | Gallery | Article and news templates (`/articles/zellige`, `/news/ram-previsions-2026-eep`) | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@4b5cfc44e475288bf13e8afa1a4940ff55bd2d20/scripts/MoorishGallery.js` | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@1/scripts/MoorishGallery.js` |
 | Gallery stylesheet | Same article and news templates | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@660ea2023c42a6a85e33379fbcf9769f085692c5/styles/mt-gallery.css` | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@1/styles/mt-gallery.css` |
 
-Pages checked: `/`, `/en`, `/en/about`, `/en/articles`, `/articles`, `/search`, `/articles/zellige`, `/news/ram-previsions-2026-eep`. Listing, about, and search pages do not include the gallery pair.
+Pages checked: `/`, `/en`, `/en/about`, `/en/articles`, `/articles`, `/search`, `/articles/zellige`, `/en/articles/bab-sebta`, `/news/ram-previsions-2026-eep`. Listing, about, and search pages do not include the gallery pair. The English article uses the same seven URLs.
 
 `c872501` is only the cookie pin. At that commit, jsDelivr returned 200 for `scripts/MoorishCookie.js`, `scripts/MoorishPaginate.js`, `scripts/MoorishGallery.js`, `styles/mt-gallery.css`, and the retired `scripts/mt-gallery.js`. It returned 404 for `MoorishQus.js`, `MoorishProgress.js`, `MoorishWebMCP.js`, `MoorishPWA.js`, `pwa/sw.js`, and `pwa/sw-noop.js`. Do not point those paths at `c872501`. `scripts/mt-gallery.js` is not referenced by the live HTML and is gone from `main`.
 
