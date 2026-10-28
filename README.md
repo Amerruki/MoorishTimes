@@ -2,8 +2,8 @@
 
 Front-end code the live site at moorishtimes.com loads. Nothing else belongs here: this repository is public.
 
-- `scripts/` — site scripts, loaded commit-pinned from jsDelivr (`cdn.jsdelivr.net/gh/amerruki/MoorishTimes@<sha>/scripts/...`)
-- `styles/` — stylesheets, loaded the same way
-- `pwa/` — manifests, service worker, icons and screenshots for the installable web app, served same-origin through the PWA worker on pwa.moorish.cloud
+- `scripts/` — site scripts. The live site still loads these commit-pinned from jsDelivr. After the tag in `RELEASING.md`, the URL is `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@1/<path>`.
+- `styles/` — stylesheets, same URL shape.
+- `pwa/` — manifests, service worker, icons and screenshots for the installable web app, served same-origin through the PWA worker. The worker pin is recorded in `RELEASING.md`.
 
-Files are referenced by commit hash, so a change goes live only when the pin on the site or worker is moved to the new commit.
+`ops/` is not loaded by the site. A change goes live only when the owner points the site at a new `v1` tag (until that swap, at a new commit).
