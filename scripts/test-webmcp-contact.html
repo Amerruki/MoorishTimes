@@ -1,0 +1,22 @@
+<!doctype html>
+<!-- Static copy of the live Contact form markup (checked 01/11/2026), no Webflow JS, for test-webmcp-contact.cjs. -->
+<html lang="fr">
+<head><meta charset="utf-8"><title>Contact | The Moorish Times</title></head>
+<body>
+<form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Contact Form" method="post" class="form">
+  <select id="Contact-Topic" name="Contact-Topic" data-name="Contact Topic" required="" class="input light w-select">
+    <option value="">Choisir un sujet</option>
+    <option value="Story">Idée de sujet</option>
+    <option value="Correction">Correction</option>
+    <option value="Rights">Droits d'image</option>
+    <option value="Ads">Publicité et partenariats</option>
+    <option value="Other">Autre</option>
+  </select>
+  <input class="input light w-input" maxlength="256" name="Contact-Name" data-name="Contact Name" type="text" id="Contact-Name">
+  <input class="input light w-input" maxlength="256" name="Contact-Email" data-name="Contact Email" type="email" id="Contact-Email" required="">
+  <textarea id="Contact-Message" name="Contact-Message" maxlength="5000" data-name="Contact Message" required="" class="input text-area light w-input"></textarea>
+  <div data-sitekey="test" class="w-form-formrecaptcha contact-recaptcha g-recaptcha"></div>
+  <input type="submit" class="button contact-button w-button" value="Envoyer">
+</form>
+</body>
+</html>

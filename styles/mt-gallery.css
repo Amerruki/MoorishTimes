@@ -1,0 +1,243 @@
+/* ============================================
+   MT Gallery v2.3 — grid + lightbox for CMS photo
+   galleries. v2.2: lone-image galleries and the
+   single-column mobile stack show images at their
+   natural aspect (no cover crop); multi-column
+   grids keep the tidy 4:3 tiles, the lightbox
+   always shows the full image.
+   Companion of MoorishGallery.js v2,
+   which builds .mt-gallery grids in place of the
+   old CMS sliders (removed from the DOM), so
+   no rule here fights the platform slider engine.
+   ============================================ */
+
+.mt-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  /* 17px mirrors .post-text side padding: gallery edges align with the text column */
+  margin: 16px 17px;
+}
+
+/* A lone image reads as a figure, not a thumbnail — and shows WHOLE (v2.2):
+   the old 16:9 frame beheaded portrait figures; a figure keeps its own aspect. */
+.mt-gallery[data-count="1"] {
+  grid-template-columns: 1fr;
+}
+
+.mt-gallery[data-count="1"] .mt-gallery__item {
+  aspect-ratio: auto;
+}
+
+.mt-gallery[data-count="1"] .mt-gallery__zoom img {
+  height: auto;
+  object-fit: unset;
+}
+
+/* Pairs and quads read better as two columns (no widowed cell) —
+   above mobile only, where everything stacks to one column anyway */
+@media (min-width: 480px) {
+  .mt-gallery[data-count="2"],
+  .mt-gallery[data-count="4"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Orphan handling on the 3-column grid (desktop) ---
+   A tile alone on the last row becomes a full-width figure;
+   two tiles on the last row fill it as one normal + one wide. */
+@media (min-width: 992px) {
+  .mt-gallery:not([data-count="2"]):not([data-count="4"]) .mt-gallery__item:last-child:nth-child(3n+1) {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+  .mt-gallery:not([data-count="2"]):not([data-count="4"]) .mt-gallery__item:last-child:nth-child(3n+2) {
+    grid-column: span 2;
+    aspect-ratio: 8 / 3;
+  }
+}
+
+.mt-gallery__item {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* The tile is a real <button> for keyboard access — reset chrome */
+.mt-gallery__zoom {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mt-gallery__zoom:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mt-gallery__zoom:focus-visible {
+  outline: 2px solid #1d7bbc;
+  outline-offset: 2px;
+}
+
+.mt-gallery__zoom img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Responsive --- */
+
+@media screen and (min-width: 480px) and (max-width: 991px) {
+  .mt-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  /* Odd tile left alone on the last 2-column row → full-width figure */
+  .mt-gallery:not([data-count="1"]) .mt-gallery__item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  /* v2.3: mobile keeps a gallery a GALLERY — two columns of square tiles
+     (faces survive a 1:1 crop far better than the old full-width letterbox).
+     An odd tile alone on the last row breaks out as a full-width figure at
+     its natural aspect; lone-image galleries stay natural (v2.2 rule). */
+  .mt-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .mt-gallery .mt-gallery__item {
+    aspect-ratio: 1 / 1;
+  }
+  .mt-gallery:not([data-count="1"]) .mt-gallery__item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    aspect-ratio: auto;
+  }
+  .mt-gallery:not([data-count="1"]) .mt-gallery__item:last-child:nth-child(odd) img {
+    height: auto;
+    object-fit: unset;
+  }
+  .mt-gallery[data-count="1"] {
+    grid-template-columns: 1fr;
+  }
+  .mt-gallery[data-count="1"] .mt-gallery__item {
+    aspect-ratio: auto;
+  }
+}
+
+/* --- Lightbox overlay --- */
+
+.mt-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mt-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mt-lightbox__img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.mt-lightbox__close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 10001;
+}
+
+.mt-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mt-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 10001;
+}
+
+.mt-lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mt-lightbox__prev { left: 20px; }
+.mt-lightbox__next { right: 20px; }
+
+.mt-lightbox__counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+/* Hide nav chrome when a gallery has a single image */
+.mt-lightbox[data-count="1"] .mt-lightbox__prev,
+.mt-lightbox[data-count="1"] .mt-lightbox__next,
+.mt-lightbox[data-count="1"] .mt-lightbox__counter {
+  display: none;
+}
+
+/* --- Reduced motion: no tile lift, no overlay fade --- */
+
+@media (prefers-reduced-motion: reduce) {
+  .mt-gallery__zoom,
+  .mt-lightbox {
+    transition: none;
+  }
+  .mt-gallery__zoom:hover {
+    transform: none;
+  }
+}

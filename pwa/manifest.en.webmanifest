@@ -1,0 +1,99 @@
+{
+  "id": "/en/",
+  "name": "The Moorish Times",
+  "short_name": "Moorish Times",
+  "description": "Moroccan heritage revisited through a new lens - history, culture and society.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/en/?utm_source=pwa&utm_medium=app",
+  "scope": "/",
+  "display": "standalone",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "background_color": "#151515",
+  "theme_color": "#151515",
+  "categories": [
+    "news",
+    "magazines",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "/pwa/icons/icon-192-v2.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa/icons/icon-512-v2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa/icons/icon-maskable-512-v2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "News",
+      "url": "/en/news?utm_source=pwa&utm_medium=shortcut",
+      "icons": [
+        {
+          "src": "/pwa/icons/icon-192-v2.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Articles",
+      "url": "/en/articles?utm_source=pwa&utm_medium=shortcut",
+      "icons": [
+        {
+          "src": "/pwa/icons/icon-192-v2.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "url": "/en/search?utm_source=pwa&utm_medium=shortcut",
+      "icons": [
+        {
+          "src": "/pwa/icons/icon-192-v2.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/pwa/screenshots/en-home-wide.jpg",
+      "sizes": "2560x1600",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "The Moorish Times front page"
+    },
+    {
+      "src": "/pwa/screenshots/en-home-narrow.jpg",
+      "sizes": "1560x3376",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "The front page on mobile"
+    },
+    {
+      "src": "/pwa/screenshots/en-news-narrow.jpg",
+      "sizes": "1560x3376",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "The news feed"
+    }
+  ]
+}
