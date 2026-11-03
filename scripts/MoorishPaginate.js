@@ -1,5 +1,5 @@
 /*!
- * MoorishPaginate v1.3 — seamless CMS pagination for moorishtimes.com
+ * MoorishPaginate v1.4 — seamless CMS pagination for moorishtimes.com
  * Replaces jquery.pjax 2.0.1 (archived upstream). Zero dependencies.
  *
  * Behavior: intercepts CMS pagination links (.w-pagination-wrapper a),
@@ -21,6 +21,10 @@
  * plain swap instead of the View Transition crossfade. Queried per action,
  * so an OS-level toggle applies without a reload. The opacity dim stays:
  * fades are the reduced-motion-safe feedback.
+ * v1.4: re-initing interactions after a swap no longer hides the nav logo;
+ * inline styles outside the list are restored after ix2 init. A pager outside
+ * the container (a second list on the page) is left to a normal navigation,
+ * since swapping the container would not update that list.
  */
 (function () {
   'use strict';
@@ -39,10 +43,22 @@
   var pages = new Map();                      // absolute URL → Promise<html text>
   var busy = false;
 
+  // ix2.init() resets every page-load animation to its start state, and the
+  // page-load trigger never fires again, so the nav logo stayed hidden after
+  // a swap. Restore the inline styles of everything outside the swapped list.
   function reinitInteractions() {
+    var kept = [];
+    var styled = document.querySelectorAll('[style], [data-w-id], [data-w-id] *');
+    for (var i = 0; i < styled.length; i++) {
+      if (!styled[i].closest(SEL)) kept.push([styled[i], styled[i].getAttribute('style')]);
+    }
     try {
       if (window.Webflow && Webflow.require) Webflow.require('ix2').init();
     } catch (e) { /* ix2 absent — nothing to re-init */ }
+    for (var j = 0; j < kept.length; j++) {
+      if (kept[j][1] === null) kept[j][0].removeAttribute('style');
+      else kept[j][0].setAttribute('style', kept[j][1]);
+    }
   }
 
   function navOffset() {
@@ -166,6 +182,7 @@
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     var a = e.target && e.target.closest && e.target.closest('.w-pagination-wrapper a');
     if (!a || !a.href) return;
+    if (!a.closest(SEL)) return;               // a list outside the container pages natively
     if (a.target && a.target !== '_self') return;
     if (a.origin !== window.location.origin) return;
     e.preventDefault();
