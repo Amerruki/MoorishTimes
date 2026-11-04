@@ -241,3 +241,22 @@
     transform: none;
   }
 }
+
+/* ============================================
+   Article and news header meta (also loaded only on
+   the article and news templates).
+   .updated-date is bound to the revision date; Webflow
+   adds .w-dyn-bind-empty when the piece was never
+   revised, which hides it with its label.
+   ============================================ */
+
+.updated-date::before { content: "Mis à jour le "; }
+html[lang^="en"] .updated-date::before { content: "Updated "; }
+.hero-byline-row .updated-date::after { content: "."; }
+
+/* Category · period on one line; no dot when the period is empty */
+.hero-meta-row .article-date:not(.w-dyn-bind-empty)::before {
+  content: "·";
+  padding: 0 0.55em;
+  opacity: 0.6;
+}
