@@ -279,5 +279,13 @@ html[lang^="en"] [data-mt="references-label"]::before { content: "References:"; 
 [data-mt="revised"]:has(.w-dyn-bind-empty) { display: none; }
 [data-mt="revised-label"]::before { content: "Révisé et mis à jour le\00a0"; }
 html[lang^="en"] [data-mt="revised-label"]::before { content: "Revised and updated on\00a0"; }
-[data-mt="view-original"]::before { content: "\00a0· Voir l’original"; }
-html[lang^="en"] [data-mt="view-original"]::before { content: "\00a0· View original"; }
+/* The separator sits on the date, outside the link, so only the link words click */
+[data-mt="revised"] .post-tag-text:not([data-mt])::after { content: "\00a0·\00a0"; color: var(--grey-3); }
+[data-mt="view-original"]::before { content: "Voir l’original"; }
+html[lang^="en"] [data-mt="view-original"]::before { content: "View original"; }
+[data-mt="view-original"],
+.post-tag:has(> [data-mt="archive-note"]) > a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
