@@ -260,3 +260,24 @@ html[lang^="en"] .updated-date::before { content: "Updated "; }
   padding: 0 0.55em;
   opacity: 0.6;
 }
+
+/* ============================================
+   Archived originals (MT-164). Labels live here so
+   each edition gets its own language; the elements
+   carry data-mt hooks and no text of their own.
+   ============================================ */
+
+/* Archive page */
+[data-mt="archive-date"]::before { content: "Publié le "; }
+html[lang^="en"] [data-mt="archive-date"]::before { content: "Published "; }
+[data-mt="archive-note"]::before { content: "Version originale. Lire la version actuelle: "; }
+html[lang^="en"] [data-mt="archive-note"]::before { content: "Original version. Read the current version: "; }
+[data-mt="references-label"]::before { content: "Références:"; }
+html[lang^="en"] [data-mt="references-label"]::before { content: "References:"; }
+
+/* End of a revised article; the row hides when there is no archived original */
+[data-mt="revised"]:has(.w-dyn-bind-empty) { display: none; }
+[data-mt="revised-label"]::before { content: "Révisé et mis à jour le "; }
+html[lang^="en"] [data-mt="revised-label"]::before { content: "Revised and updated on "; }
+[data-mt="view-original"]::before { content: "\00a0· Voir l’original"; }
+html[lang^="en"] [data-mt="view-original"]::before { content: "\00a0· View original"; }
