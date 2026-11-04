@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push origin v*)",
+      "Bash(git push origin amerruki/*)",
+      "Bash(git push -u origin amerruki/*)",
+      "Bash(git tag *)",
+      "Bash(git ls-remote *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr merge *)",
+      "Bash(curl * https://api.webflow.com/v2/*)",
+      "Bash(curl * https://purge.jsdelivr.net/*)"
+    ],
+    "ask": [
+      "Bash(git push * --force*)",
+      "Bash(git push * -f*)",
+      "Bash(git push * +*)",
+      "Bash(git push * --delete*)",
+      "Bash(git push * -d*)",
+      "Bash(git push * :*)",
+      "Bash(git tag -d*)",
+      "Bash(git tag --delete*)",
+      "Bash(git tag * -d*)",
+      "Bash(git tag * --delete*)",
+      "Bash(git tag -f*)",
+      "Bash(git tag * -f*)",
+      "Bash(git tag * --force*)",
+      "Bash(gh pr merge * -d*)",
+      "Bash(gh pr merge * --delete-branch*)"
+    ]
+  }
+}
