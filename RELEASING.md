@@ -12,7 +12,7 @@ The live site loads these files from jsDelivr at `@1`, which resolves to the new
 | Reading progress | Every page | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@1/scripts/MoorishProgress.js` |
 | In-browser agent tools | Every page | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@1/scripts/MoorishWebMCP.js` |
 | Gallery | Article and news templates | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@1/scripts/MoorishGallery.js` |
-| Gallery stylesheet | Same article and news templates | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@1/styles/mt-gallery.css` |
+| Gallery stylesheet | Same article and news templates, plus the archives template | `https://cdn.jsdelivr.net/gh/amerruki/MoorishTimes@1/styles/mt-gallery.css` |
 
 Disqus `count.js` is Disqus, not this repo.
 
