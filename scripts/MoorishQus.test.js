@@ -296,6 +296,7 @@ test("click loads embed.js once, keeps disqus_config, holds height, and focuses 
   });
   const button = sandbox.document.querySelector("button.mt-disqus-show");
   const section = sandbox.document.querySelector(".comment-section");
+  assert.equal(sandbox.document.getElementById("disqus_thread").style.marginBottom, "0px");
   button.click();
   assert.equal(section.style.minHeight, "48px");
   const embed = scriptsLike(sandbox.document, "disqus.com/embed.js");
@@ -309,7 +310,9 @@ test("click loads embed.js once, keeps disqus_config, holds height, and focuses 
   embed[0].onload();
   const thread = sandbox.document.getElementById("disqus_thread");
   assert.equal(sandbox.document.activeElement, thread);
-  assert.equal(button.hidden, true);
+  assert.equal(button.parentNode, null);
+  assert.equal(sandbox.document.querySelector(".mt-disqus-show"), null);
+  assert.equal(thread.style.marginBottom, "");
   assert.equal(thread.getAttribute("tabindex"), "-1");
   assert.equal(sandbox.document.querySelectorAll("[id='disqus_thread']").length, 1);
 });

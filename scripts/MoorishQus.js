@@ -132,6 +132,10 @@
     }
     while (thread.firstChild) thread.removeChild(thread.firstChild);
     thread.setAttribute("tabindex", "-1");
+    // The site styles .disqus_thread with a negative bottom margin that tucks
+    // the Disqus footer away. Before Disqus fills it, that margin would pull
+    // the section, which hides overflow, down to zero height over the button.
+    thread.style.marginBottom = "0px";
 
     var button = document.createElement("button");
     button.type = "button";
@@ -153,7 +157,9 @@
       s.async = true;
       s.setAttribute("data-timestamp", String(+new Date()));
       s.onload = function () {
-        button.hidden = true;
+        // Removed rather than hidden: the site's .button display rule outranks [hidden].
+        if (button.parentNode) button.parentNode.removeChild(button);
+        thread.style.marginBottom = "";
         thread.focus();
       };
       s.onerror = function () {
