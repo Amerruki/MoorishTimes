@@ -349,4 +349,5 @@ test("listing pages still load count.js for card counts", () => {
   const countJs = scriptsLike(sandbox.document, "disqus.com/count.js");
   assert.equal(countJs.length, 1);
   assert.equal(countJs[0].getAttribute("src"), "https://moorishtimes.disqus.com/count.js");
+  assert.equal(countJs[0].getAttribute("id"), "dsq-count-scr");
 });

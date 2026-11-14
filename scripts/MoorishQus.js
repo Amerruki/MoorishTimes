@@ -40,6 +40,7 @@
   var optedIn = false;
   var blockCounts = false;
   var guardOn = false;
+  var countsAsked = false;
 
   function pageLang() {
     return (document.documentElement.lang || "fr").slice(0, 2) === "en" ? "en" : "fr";
@@ -96,10 +97,13 @@
 
   function requestCounts() {
     if (!document.querySelector(".disqus-comment-count")) return;
+    countsAsked = true;
     if (window.DISQUSWIDGETS && typeof window.DISQUSWIDGETS.getCount === "function") {
       window.DISQUSWIDGETS.getCount({ reset: true });
     } else if (!document.querySelector('script[src*="disqus.com/count.js"]')) {
       var s = document.createElement("script");
+      // count.js finds the forum name from the src of the element with this id.
+      s.id = "dsq-count-scr";
       s.src = COUNT_JS;
       s.async = true;
       document.body.appendChild(s);
@@ -166,6 +170,7 @@
         optedIn = false;
         button.disabled = false;
         button.removeAttribute("aria-busy");
+        button.focus();
       };
       (document.head || document.body).appendChild(s);
       requestCounts();
@@ -204,8 +209,9 @@
     }
 
     if (gated && !optedIn) return;
-    if (!added && !document.querySelector(".disqus-comment-count")) return;
-    requestCounts();
+    // Count again only for new cards: count.js writing the counts is itself a
+    // DOM change, and recounting on every change would never stop.
+    if (added || !countsAsked) requestCounts();
   }
 
   function start() {
